@@ -3,17 +3,19 @@
            https://api.github.com/users/<your name>
 */
 const githubCards = document.querySelector(".cards");
+let newCard = {};
 
-function getGithubUser() {
+//function getGithubUser() {
   axios.get("https://api.github.com/users/cl-sol")
   .then(response => {
-    console.log(response);
-    githubCards.appendChild(githubCardCreator());
+    console.log(response.data);
+    newCard = response.data;
+    githubCards.appendChild(githubCardCreator(newCard));
   })
   .catch(error => {
     console.log(error);
   })
-}
+//}
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -85,8 +87,8 @@ function githubCardCreator(obj) {
   name.textContent = obj.name;
   username.textContent = obj.login;
   location.textContent = obj.location;
-  profile.textContent = Profile ;
-  profileLink.href = obj.html_url;
+  profile.textContent = obj.url;
+  profileLink.href = obj.url;
   followers.textContent = obj.followers;
   following.textContent = obj.following;
   bio.textContent = obj.bio;
